@@ -22,8 +22,24 @@ nav .logo{color:var(--pink);font-size:18px;padding:5px 12px}
 @keyframes drop{from{opacity:0;translate:0 -24px}}
 .hero{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center}
 #bloom{width:100%;max-width:440px;height:auto;aspect-ratio:26/36;justify-self:center;image-rendering:pixelated;filter:drop-shadow(0 0 48px #ff6fae40)}
+.bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38;will-change:transform}
+.bg .a1{width:46vw;height:46vw;left:-8vw;top:8%;background:#ff6fae;animation:fl1 16s ease-in-out infinite alternate,bgin 2.4s ease both}
+.bg .a2{width:40vw;height:40vw;right:-6vw;bottom:-10%;background:#8b6cff;animation:fl2 20s ease-in-out infinite alternate,bgin 2.4s ease both}
+@keyframes fl1{to{transform:translate(12vw,10vh) scale(1.15)}}
+@keyframes fl2{to{transform:translate(-10vw,-8vh) scale(1.2)}}
+.end{position:relative;overflow:hidden;margin-top:40px}.end>section,.end>footer{position:relative;z-index:1}
+.end .bg{-webkit-mask-image:linear-gradient(0deg,#000 70%,transparent);mask-image:linear-gradient(0deg,#000 70%,transparent)}
+.end .ghost{display:none}.end .bg i{opacity:.2}
+.ghost{position:absolute;inset:-12% -6%;display:flex;flex-direction:column;justify-content:center;gap:1.2vw;transform:rotate(-7deg)}
+.gr{display:flex;width:max-content;margin:0;font:600 clamp(110px,17vw,280px)/1 var(--b);letter-spacing:-.04em;white-space:nowrap;color:#f1ebff0f;animation:gl 80s linear infinite,gin 1.8s cubic-bezier(.2,.8,.2,1) both}
+.gr.rev{animation-direction:reverse,normal}.gr:nth-child(1){animation-delay:0s,.5s}.gr:nth-child(2){animation-delay:-22s,.75s}.gr:nth-child(3){animation-delay:-41s,1s}.gr:nth-child(4){animation-delay:-9s,1.25s}
+.gr span{padding-right:.5em}
+@keyframes gl{to{transform:translateX(-50%)}}
+@keyframes gin{from{opacity:0;translate:0 80px}}
+@keyframes bgin{from{opacity:0}}
 .hin{position:relative;width:100%;max-width:1400px;margin:0 auto;padding:110px 32px 56px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;align-items:center}
-h1{font:700 clamp(46px,8vw,124px)/.98 var(--d);letter-spacing:-.03em;margin:0 0 30px;text-shadow:0 2px 40px #0e0a17b0}
+h1{font:700 clamp(46px,8vw,124px)/.98 var(--d);letter-spacing:-.03em;margin:0 0 30px}
 h1 .w{display:block;overflow:hidden;padding:0 .1em .07em;margin-left:-.1em}h1 .w:nth-child(2) i{margin-left:-.012em}h1 .w:nth-child(3) i{margin-left:-.03em}
 h1 .w i{display:block;font-style:normal;transform:translateY(112%);animation:up 1.2s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.16s*var(--i) + .25s)}
 @keyframes up{to{transform:none}}
@@ -69,7 +85,7 @@ h2{font:700 clamp(34px,6vw,76px)/1.05 var(--d);letter-spacing:-.025em;margin:0 0
 .marq{overflow:hidden;margin-top:90px;border-block:1px solid var(--line);padding:24px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .track{display:flex;width:max-content;animation:mq 34s linear infinite}
 .marq:hover .track{animation-play-state:paused}
-.track span{display:flex;align-items:center;gap:48px;padding-right:48px;font:700 clamp(30px,5vw,60px) var(--d);color:transparent;-webkit-text-stroke:1px #f1ebff77;white-space:nowrap;transition:color .3s}
+.track span{display:flex;align-items:center;gap:48px;padding-right:48px;font:700 clamp(30px,5vw,60px) var(--d);color:#f1ebff4d;white-space:nowrap;transition:color .3s}
 .track span:hover{color:var(--text)}
 .track span::after{content:"✿";color:var(--pink);-webkit-text-stroke:0;font-size:.55em}
 @keyframes mq{to{transform:translateX(-50%)}}
@@ -101,6 +117,8 @@ footer{max-width:1240px;margin:0 auto;padding:80px 24px 56px;color:var(--dim);fo
 <nav><a class="logo" href="#top" data-ia="home" aria-label="В начало">✿</a><a href="#games" data-i="n_games">Игры</a><a href="#about" data-i="n_about">Обо мне</a><a href="#contact" data-i="n_contact">Контакты</a><div class="lg" role="group" aria-label="Language"><button data-l="ru">RU</button><button data-l="en">EN</button></div></nav>
 
 <header class="hero" id="top">
+<div class="bg" aria-hidden="true"><i class="a1"></i><i class="a2"></i><div class="ghost"></div></div>
+
 <div class="hin">
 <div class="txt">
 <h1 aria-label="flowersaroundhouse"><span class="w" style="--i:0"><i>flowers</i></span><span class="w" style="--i:1"><i>around</i></span><span class="w" style="--i:2"><i>house</i></span></h1>
@@ -127,12 +145,13 @@ footer{max-width:1240px;margin:0 auto;padding:80px 24px 56px;color:var(--dim);fo
 <div class="log rv" id="log"></div>
 </section>
 
+<div class="end"><div class="bg" aria-hidden="true"><i class="a1"></i><i class="a2"></i><div class="ghost"></div></div>
 <section id="contact">
 <h2 class="rv" data-i="n_contact">Контакты</h2>
 <div class="links rv" id="links"></div>
 </section>
 
-<footer><span>© <span id="y"></span> flowersaroundhouse</span><span data-i="foot">Сделано с ✿ и кофе</span></footer>
+<footer><span>© <span id="y"></span> flowersaroundhouse</span><span data-i="foot">Сделано с ✿ и кофе</span></footer></div>
 
 <div id="modal" role="dialog" aria-modal="true" data-ia="det" aria-label="Подробности игры"><div id="mb"></div></div>
 
@@ -146,7 +165,7 @@ var GAMES=[
 var STACK=["Unity","C#","Godot","GDScript","C++","JavaScript","Git","Aseprite"];
 var LINKS=[["github","https://github.com/perfume009"],["itch.io","https://flowersaroundhouse.itch.io/"],["telegram","https://t.me/+Vwn7n2eTDXUzZDgy"]];
 var LOG=[["2026","В разработке игра Escape From Churlu","Escape From Churlu is in development"]];
-var ROLES={ru:["инди-разработчик игр","пишу код, рисую пиксели, ломаю баги","собираю миры из нулей и единиц","flowers around the house, bugs inside"],en:["indie game developer","writing code, drawing pixels, breaking bugs","building worlds out of zeros and ones","flowers around the house, bugs inside"]};
+var ROLES={ru:["инди-разработчик игр","пишу код, рисую пиксели, ломаю баги","flowers around the house, bugs inside"],en:["indie game developer","writing code, drawing pixels, breaking bugs","flowers around the house, bugs inside"]};
 // ===============================
 var $=function(i){return document.getElementById(i)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -198,6 +217,11 @@ var st=STACK.map(function(s){return '<span>'+esc(s)+'</span>'}).join("");$("stac
 function renderLog(){$("log").innerHTML=LOG.map(function(l){return '<div class="row"><b>'+esc(l[0])+'</b><p>'+esc(l[L==="en"?2:1])+'</p></div>'}).join("")}renderLog();
 $("links").innerHTML=LINKS.map(function(l){return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener"><span>'+esc(l[0])+'</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>'}).join("");
 $("y").textContent=new Date().getFullYear();
+
+
+// hero backdrop: giant outlined name scrolling behind the title
+(function(){var t=Array(3).join("flowersaroundhouse ✿ ");document.querySelectorAll(".ghost").forEach(function(g){for(var i=0;i<4;i++){var p=document.createElement("p");p.className="gr"+(i%2?" rev":"");p.innerHTML="<span>"+t+"</span><span>"+t+"</span>";g.appendChild(p)}})})();
+
 
 // rotating role
 var ri=0,ro=$("role");ro.textContent=ROLES[L][0];
