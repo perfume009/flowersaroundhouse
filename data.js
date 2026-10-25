@@ -16,7 +16,7 @@
 //
 var GAMES=[
  {
-  n: "Escape From Churlu",
+  n: "Escape From Churlu 1.2 beta",
   id: "churlu",
   feat: {
    ru: [
