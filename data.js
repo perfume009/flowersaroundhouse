@@ -96,5 +96,5 @@ var DEVLOG=[  // «Новости разработки», сверху самы�
  { d: "21.10.2026", ru: "В разработке игра Grand Theft Churlu Churl-city.", en: "Grand Theft Churlu Churl-city is in development." },
  { d: "12.10.2026", ru: "Запустил сайт. Здесь будут новости разработки Escape From Churlu.", en: "The site is live. Development news for Escape From Churlu will appear here." }
 ];
-var ROLES={ru:["инди-разработчик игр", "пишу код, рисую пиксели, ломаю баги", "flowers around the house, bugs inside"],
- en:["indie game developer", "writing code, drawing pixels, breaking bugs", "flowers around the house, bugs inside"]};   // фразы под названием на главной
+var ROLES={ru:["инди-разработчик игр","flowers around the house, bugs inside"],
+ en:["indie game developer","flowers around the house, bugs inside"]};   // фразы под названием на главной
