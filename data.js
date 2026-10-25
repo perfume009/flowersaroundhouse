@@ -89,6 +89,7 @@ var GAMES=[
 var STACK=["Unity", "C#", "Godot", "GDScript", "C++", "JavaScript", "Git", "Aseprite"];   // бегущая строка в «Обо мне»
 var LINKS=[["github", "https://github.com/perfume009"], ["itch.io", "https://flowersaroundhouse.itch.io/"], ["telegram", "https://t.me/+Vwn7n2eTDXUzZDgy"]];   // «Контакты» (telegram используется и для кнопки в новостях)
 var LOG=[  // «История»: [год, по-русски, по-английски]
+ ["26.10.2026", "Grand Theft Churlu Churl-city в активной разработке(про Escape from churlu тоже не забываю:))" "Grand Theft Churlu Churl-city is in development"],
  ["2026", "В разработке игра Grand Theft Churlu Churl-city", "Grand Theft Churlu Churl-city is in development"],
  ["2026", "В разработке игра Escape From Churlu", "Escape From Churlu is in development"]
 ];
