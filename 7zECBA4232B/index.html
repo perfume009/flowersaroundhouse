@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>flowersaroundhouse — game dev</title>
+<meta name="description" content="flowersaroundhouse — инди-разработчик игр. Escape From Churlu и другие проекты на Godot.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="flowersaroundhouse — game dev">
+<meta property="og:description" content="Escape From Churlu и другие игры на Godot. Новости разработки и ссылки.">
+<meta property="og:image" content="https://perfume009.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://perfume009.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e0a17">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+<nav id="nav"></nav>
+<header class="hero" id="top">
+<div class="bg" aria-hidden="true"><i class="a1"></i><i class="a2"></i><div class="ghost"></div></div>
+
+<div class="hin">
+<div class="txt">
+<h1 aria-label="flowersaroundhouse"><span class="w" style="--i:0"><i>flowers</i></span><span class="w" style="--i:1"><i>around</i></span><span class="w" style="--i:2"><i>house</i></span></h1>
+<p class="role"><span id="role"></span></p>
+<div class="cta"><a class="btn p" href="#games" data-i="cta1">Смотреть игры</a><a class="btn" href="#contact" data-i="cta2">Связаться</a></div>
+</div>
+<canvas id="bloom" aria-hidden="true"></canvas>
+</div>
+</header>
+
+<section id="games">
+<h2 class="rv" data-i="n_games">Игры</h2>
+<div class="tools rv"><input id="q" type="search" placeholder="Поиск по названию" aria-label="Поиск"></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="devlog">
+<h2 class="rv" data-i="dev_h">Новости разработки</h2>
+<div class="log rv dv" id="dlog" style="margin-top:0"></div>
+<div class="rv" style="margin-top:32px"><a class="btn p" id="tgbtn" href="#" target="_blank" rel="noopener" data-i="tg_btn">Читать в Telegram</a></div>
+</section>
+
+<section id="about">
+<h2 class="rv" data-i="n_about">Обо мне</h2>
+<p class="big rv" data-i="bio">Делаю игры сам: от идеи и геймплея до релиза.</p>
+<div class="stats rv">
+<div class="stat"><b data-n="GAMES">0</b><span id="gl">игр</span></div>
+</div>
+<div class="marq rv" data-ia="stack" aria-label="Стек"><div class="track" id="stack"></div></div>
+<div class="log rv" id="log"></div>
+</section>
+
+
+<div class="end" id="end"></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
