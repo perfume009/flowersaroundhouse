@@ -4,7 +4,7 @@
 //
 //  Поля игры:
 //   n      название                       id    имя страницы: id "churlu" -> churlu.html
-//   st     статус: "релиз", "jam" или "в разработке"      y   год
+//   st     статус: "релиз", "jam", "в разработке" или "планируется"      y   год
 //   tags   теги, например ["Godot","3D"]  url   ссылка для кнопки Itch.io ("#" = кнопки нет)
 //   img    обложка (файл рядом с index.html)   shots   список скриншотов
 //   video  ID ролика на YouTube (например "dQw4w9WgXcQ"), пусто = блока трейлера нет
@@ -16,7 +16,7 @@
 //
 var GAMES=[
  {
-  n: "Escape From Churlu 1.2 beta",
+  n: "Escape From Churlu",
   id: "churlu",
   feat: {
    ru: [
@@ -83,6 +83,22 @@ var GAMES=[
   st: "в разработке",
   y: 2026,
   url: "#"
+ },
+ {
+  n:"Call of Churlu: Modern Elban",
+  id:"elban",
+  artTitle:true,
+  plain:true,
+  img:"elban.jpg",
+  shots:["elban.jpg"],
+  video:"",
+  d:{ru:"Будет в разработке когда-нибудь...",en:"Will be in development someday..."},
+  l:{ru:"Будет в разработке когда-нибудь...",en:"Will be in development someday..."},
+  tags:[],
+  st:"планируется",
+  y:"",
+  url:"#",
+  feat:{ru:[],en:[]}
  }
 ];
 
@@ -93,9 +109,8 @@ var LOG=[  // «История»: [год, по-русски, по-англий�
  ["2026", "В разработке игра Escape From Churlu", "Escape From Churlu is in development"]
 ];
 var DEVLOG=[  // «Новости разработки», сверху самые свежие
- { d: "26.10.2026", ru: "Grand Theft Churlu Churl-city в активной разработке(про Escape from churlu тоже не забываю:))", en: "Grand Theft Churlu Churl-city is in development." },
  { d: "21.10.2026", ru: "В разработке игра Grand Theft Churlu Churl-city.", en: "Grand Theft Churlu Churl-city is in development." },
  { d: "12.10.2026", ru: "Запустил сайт. Здесь будут новости разработки Escape From Churlu.", en: "The site is live. Development news for Escape From Churlu will appear here." }
 ];
-var ROLES={ru:["инди-разработчик игр","flowers around the house, bugs inside"],
- en:["indie game developer","flowers around the house, bugs inside"]};   // фразы под названием на главной
+var ROLES={ru:["инди-разработчик игр", "пишу код, рисую пиксели, ломаю баги", "flowers around the house, bugs inside"],
+ en:["indie game developer", "writing code, drawing pixels, breaking bugs", "flowers around the house, bugs inside"]};   // фразы под названием на главной
