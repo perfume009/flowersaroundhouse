@@ -121,8 +121,8 @@ addEventListener("keydown",function(e){if($("lb").classList.contains("on")){if(e
 }
 function rvw(t){return t.split(" ").map(function(w){return '<span class="sw">'+esc(w)+'</span>'}).join(" ")}
 function gph(g,hue){var s="";for(var i=0;i<(g.soon||0);i++)s+='<div class="gph" style="--h:'+hue+'"><span>✿</span><em>'+esc(tr("soon_shot"))+'</em></div>';return s}
-function heroesH(g,hue){return '<div class="heroes"><h2 class="rv">'+esc(tr("heroes"))+'</h2><div class="hgrid">'+g.heroes.map(function(h,i){var nm=h.name[L];
- return '<article class="hc rv" style="--h:'+((hue+i*38)%360)+';transition-delay:'+i*90+'ms"><div class="hav">'+(h.img?'<img src="'+esc(h.img)+'" alt="'+esc(nm)+'">':'<canvas data-n="'+esc(h.name.ru)+'"></canvas>')+'</div><h3>'+esc(nm)+'</h3><p class="hr">'+esc(h.role[L])+'</p><p>'+esc(h.d[L])+'</p></article>'}).join("")+'</div></div>'}
+function heroesH(g,hue){return '<div class="hh rv"><h2>'+esc(tr("heroes"))+'</h2></div>'+g.heroes.map(function(h,i){var nm=h.name[L];
+ return '<div class="fp hp'+(i%2?' r':'')+'" style="--h:'+((hue+i*38)%360)+'"><div class="fbg"'+(h.img?' data-px="0.12"><img src="'+esc(h.img)+'" alt="'+esc(nm)+'" loading="lazy">':'>')+'</div><div class="fc rv"><p class="hr">'+esc(h.role[L])+'</p><h3>'+esc(nm)+'</h3><p>'+esc(h.d[L])+'</p></div></div>'}).join("")}
 function renderGame(g,quiet){
  var imgs=slides(g).filter(function(x){return x.t==="i"}).map(function(x){return x.src}),n=imgs.length,gimgs=g.shots||[],
   feats=(g.feat&&g.feat[L])||[],st=T[L].st[g.st]||g.st,link=g.url&&g.url!=="#",hue=hueG(g),
@@ -143,7 +143,6 @@ function renderGame(g,quiet){
   +'<div class="gend rv">'+(link?'<a class="btn p" href="'+esc(g.url)+'" target="_blank" rel="noopener">'+esc(tr("play"))+'</a>':'')+'<a class="btn" href="index.html#games">'+esc(tr("back"))+'</a></div>';
  var p=$("gp");p.classList.toggle("still",!!quiet);p.innerHTML=h;
  p.querySelectorAll(".rv").forEach(function(e){io.observe(e)});
- p.querySelectorAll(".hav canvas").forEach(function(c){sprite(c,c.dataset.n)});
  p.querySelectorAll(".gtrack button").forEach(function(b){b.onclick=function(){lbOpen(gimgs,+b.dataset.j)}});
  p.querySelectorAll(".gb").forEach(function(b){b.onclick=function(){var t=p.querySelector(".gtrack");t.scrollBy({left:+b.dataset.d*t.clientWidth*.8,behavior:"smooth"})}});
  p.querySelectorAll(".vp").forEach(function(b){b.onclick=function(){var f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(b.dataset.id)+"?autoplay=1&rel=0";f.allow="autoplay; encrypted-media; picture-in-picture";f.allowFullscreen=true;f.title="Trailer";b.replaceWith(f)}});
