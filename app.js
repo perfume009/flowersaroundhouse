@@ -122,7 +122,7 @@ addEventListener("keydown",function(e){if($("lb").classList.contains("on")){if(e
 function rvw(t){return t.split(" ").map(function(w){return '<span class="sw">'+esc(w)+'</span>'}).join(" ")}
 function gph(g,hue){var s="";for(var i=0;i<(g.soon||0);i++)s+='<div class="gph" style="--h:'+hue+'"><span>✿</span><em>'+esc(tr("soon_shot"))+'</em></div>';return s}
 function heroesH(g,hue){return '<div class="hh rv"><h2>'+esc(tr("heroes"))+'</h2></div>'+g.heroes.map(function(h,i){var nm=h.name[L];
- return '<div class="fp hp'+(i%2?' r':'')+'" style="--h:'+((hue+i*38)%360)+'"><div class="fbg"'+(h.img?' data-px="0.12"><img src="'+esc(h.img)+'" alt="'+esc(nm)+'" loading="lazy">':'>')+'</div><div class="fc rv"><p class="hr">'+esc(h.role[L])+'</p><h3>'+esc(nm)+'</h3><p>'+esc(h.d[L])+'</p></div></div>'}).join("")}
+ return '<div class="fp hp'+(i%2?' r':'')+'" style="--h:'+((hue+i*38)%360)+'"><div class="fbg"'+(h.img?' data-px="0.12"><img src="'+esc(h.img)+'" alt="'+esc(nm)+'" style="object-position:'+esc(h.pos||"50% 50%")+'" loading="lazy">':'>')+'</div><div class="fc rv"><p class="hr">'+esc(h.role[L])+'</p><h3>'+esc(nm)+'</h3><p>'+esc(h.d[L])+'</p></div></div>'}).join("")}
 function renderGame(g,quiet){
  var imgs=slides(g).filter(function(x){return x.t==="i"}).map(function(x){return x.src}),n=imgs.length,gimgs=g.shots||[],
   feats=(g.feat&&g.feat[L])||[],st=T[L].st[g.st]||g.st,link=g.url&&g.url!=="#",hue=hueG(g),

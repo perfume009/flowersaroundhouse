@@ -15,7 +15,8 @@
 //   hue    число 0-360: цвет страницы игры (если не указано, берётся из названия)
 //   tags   теги; для двух языков пиши так: {ru:"Экшен",en:"Action"}
 //   tagline  крупная фраза после описания;  story2  второй абзац истории
-//   heroes   герои: name, role, d (на двух языках) и по желанию img:"файл.jpg" с портретом
+//   heroes   герои: name, role, d (на двух языках), img:"файл.jpg" (портрет на весь экран)
+//            и pos:"x% y%" (куда «смотреть» в кадре на узком экране, например "70% 40%")
 //   soon   сколько «заглушек» под скриншоты показать в галерее. Когда сделаешь скрины,
 //          впиши их в shots:[...] и поставь soon:0
 //  Тексты d, l и feat пишутся на двух языках: {ru:..., en:...}
@@ -99,7 +100,9 @@ var GAMES=[
     d: {
      ru: "Из Эльбана. Знает каждый переулок родного района.",
      en: "From Elban. Knows every alley of his home district."
-    }
+    },
+    img: "ilya.jpg",
+    pos: "72% 40%"
    },
    {
     name: {
@@ -113,7 +116,9 @@ var GAMES=[
     d: {
      ru: "Решает вопросы через старые связи.",
      en: "Solves problems through old connections."
-    }
+    },
+    img: "valyansky.jpg",
+    pos: "22% 30%"
    },
    {
     name: {
@@ -127,7 +132,9 @@ var GAMES=[
     d: {
      ru: "Просто оказался не в том месте не в то время, но теперь вынужден выживать вместе со всеми.",
      en: "He simply ended up in the wrong place at the wrong time, and now has to survive together with everyone else."
-    }
+    },
+    img: "egor.jpg",
+    pos: "62% 40%"
    }
   ],
   story2: {
