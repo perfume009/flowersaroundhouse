@@ -9,13 +9,15 @@ function sprite(c,name){var r=rng(name),x=c.getContext("2d"),hue=Math.floor(r()*
  for(var y=0;y<10;y++)for(var i=0;i<5;i++)if(r()>.45){x.fillStyle="hsl("+(hue+y*6)+",75%,"+(58+r()*14)+"%)";x.fillRect(i,y,1,1);x.fillRect(9-i,y,1,1)}}
 
 // ----- тексты интерфейса (RU / EN) -----
-var T={ru:{n_games:"Игры",n_about:"Обо мне",n_contact:"Контакты",cta1:"Смотреть игры",cta2:"Связаться",bio:"Делаю игры сам: от идеи и геймплея до релиза.",foot:"Сделано с ✿ и кофе",ph:"Поиск по названию",none:"Ничего не найдено. Попробуй другой запрос.",play:"Itch.io",close:"Закрыть",home:"В начало",stack:"Стек",det:"Подробности игры",dev_h:"Новости разработки",tg_btn:"Читать в Telegram",prev:"Назад",next:"Вперёд",trailer:"Смотреть трейлер",zoom:"Увеличить",back:"Все игры",about:"О игре",feat:"Особенности",shots:"Скриншоты",trailer_h:"Трейлер",d_status:"Статус",d_year:"Год",d_tags:"Теги",copy:"Скопировать ссылку",copied:"Ссылка скопирована",st:{"релиз":"релиз","jam":"jam","в разработке":"в разработке","планируется":"планируется"}},
- en:{n_games:"Games",n_about:"About",n_contact:"Contact",cta1:"View games",cta2:"Get in touch",bio:"I make games solo, from the first idea and gameplay to release.",foot:"Made with ✿ and coffee",ph:"Search by title",none:"Nothing found. Try another search.",play:"Itch.io",close:"Close",home:"Back to top",stack:"Stack",det:"Game details",dev_h:"Dev news",tg_btn:"Follow on Telegram",prev:"Previous",next:"Next",trailer:"Watch trailer",zoom:"Enlarge",back:"All games",about:"About the game",feat:"Features",shots:"Screenshots",trailer_h:"Trailer",d_status:"Status",d_year:"Year",d_tags:"Tags",copy:"Copy link",copied:"Link copied",st:{"релиз":"released","jam":"jam","в разработке":"in development","планируется":"planned"}}};
+var T={ru:{n_games:"Игры",n_about:"Обо мне",n_contact:"Контакты",cta1:"Смотреть игры",cta2:"Связаться",bio:"Делаю игры сам: от идеи и геймплея до релиза.",foot:"Сделано с ✿ и кофе",ph:"Поиск по названию",none:"Ничего не найдено. Попробуй другой запрос.",play:"Itch.io",close:"Закрыть",home:"В начало",stack:"Стек",det:"Подробности игры",dev_h:"Новости разработки",tg_btn:"Читать в Telegram",prev:"Назад",next:"Вперёд",trailer:"Смотреть трейлер",zoom:"Увеличить",back:"Все игры",about:"О игре",feat:"Особенности",shots:"Скриншоты",trailer_h:"Трейлер",d_status:"Статус",d_year:"Год",d_tags:"Теги",copy:"Скопировать ссылку",copied:"Ссылка скопирована",soon_shot:"Скриншот скоро",heroes:"Три героя",st:{"релиз":"релиз","jam":"jam","в разработке":"в разработке","планируется":"планируется"}},
+ en:{n_games:"Games",n_about:"About",n_contact:"Contact",cta1:"View games",cta2:"Get in touch",bio:"I make games solo, from the first idea and gameplay to release.",foot:"Made with ✿ and coffee",ph:"Search by title",none:"Nothing found. Try another search.",play:"Itch.io",close:"Close",home:"Back to top",stack:"Stack",det:"Game details",dev_h:"Dev news",tg_btn:"Follow on Telegram",prev:"Previous",next:"Next",trailer:"Watch trailer",zoom:"Enlarge",back:"All games",about:"About the game",feat:"Features",shots:"Screenshots",trailer_h:"Trailer",d_status:"Status",d_year:"Year",d_tags:"Tags",copy:"Copy link",copied:"Link copied",soon_shot:"Screenshot coming soon",heroes:"Three heroes",st:{"релиз":"released","jam":"jam","в разработке":"in development","планируется":"planned"}}};
 var L="ru";try{L=localStorage.getItem("lang")}catch(e){}
 if(L!=="ru"&&L!=="en")L=((navigator.language||"").slice(0,2)==="ru")?"ru":"en";
 function tr(k){return T[L][k]}
 var SC={"релиз":"#ffd96a","jam":"#8b6cff","в разработке":"#ff6fae","планируется":"#9d93b8"};
-function tagsH(g){return g.tags.map(function(t){return '<span>'+esc(t)+'</span>'}).join("")}
+function tagTxt(t){return typeof t==="string"?t:t[L]}
+function hueG(g){return g.hue!=null?g.hue:hueOf(g.n)}
+function tagsH(g){return g.tags.map(function(t){return '<span>'+esc(tagTxt(t))+'</span>'}).join("")}
 
 function gid(g){return g.id}
 function pageOf(g){return g.page||gid(g)+".html"}
@@ -38,7 +40,7 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 // ----- главная: игры, история, новости -----
 function draw(){var q=$("q").value.toLowerCase();
  var list=GAMES.filter(function(g){return g.n.toLowerCase().indexOf(q.trim())>-1});
- $("grid").innerHTML=list.length?list.map(function(g,k){return '<a class="card'+(g.plain?' plain':'')+'" href="'+esc(pageOf(g))+'" data-i="'+GAMES.indexOf(g)+'" style="--h:'+hueOf(g.n)+';--c:'+(SC[g.st]||"#9d93b8")+';--dl:'+k*90+'ms"><div class="cover">'+(g.img?'<img src="'+esc(g.img)+'" alt="'+esc(g.n)+'" loading="lazy">':'<canvas data-n="'+esc(g.n)+'"></canvas>')+'</div><div class="bd"><h3>'+esc(g.n)+'</h3><div class="meta"><i class="dot"></i><span>'+esc(T[L].st[g.st]||g.st)+'</span>'+(g.y?'<span>'+g.y+'</span>':'')+'</div><p>'+esc(g.d[L])+'</p><div class="tags">'+tagsH(g)+'</div></div></a>'}).join(""):'<p class="empty">'+tr("none")+'</p>';
+ $("grid").innerHTML=list.length?list.map(function(g,k){return '<a class="card'+(g.plain?' plain':'')+'" href="'+esc(pageOf(g))+'" data-i="'+GAMES.indexOf(g)+'" style="--h:'+hueG(g)+';--c:'+(SC[g.st]||"#9d93b8")+';--dl:'+k*90+'ms"><div class="cover">'+(g.img?'<img src="'+esc(g.img)+'" alt="'+esc(g.n)+'" loading="lazy">':'<canvas data-n="'+esc(g.n)+'"></canvas>')+'</div><div class="bd"><h3>'+esc(g.n)+'</h3><div class="meta"><i class="dot"></i><span>'+esc(T[L].st[g.st]||g.st)+'</span>'+(g.y?'<span>'+g.y+'</span>':'')+'</div><p>'+esc(g.d[L])+'</p><div class="tags">'+tagsH(g)+'</div></div></a>'}).join(""):'<p class="empty">'+tr("none")+'</p>';
  document.querySelectorAll("canvas[data-n]").forEach(function(c){sprite(c,c.dataset.n)});
  document.querySelectorAll(".card").forEach(function(c){io.observe(c);
   c.onpointermove=function(e){if(e.pointerType!=="mouse")return;var b=c.getBoundingClientRect(),px=(e.clientX-b.left)/b.width,py=(e.clientY-b.top)/b.height;
@@ -117,24 +119,32 @@ var lx=null;$("lb").addEventListener("touchstart",function(e){lx=lbZ?null:e.touc
 $("lb").addEventListener("touchend",function(e){if(lx===null||lbA.length<2)return;var d=e.changedTouches[0].clientX-lx;if(Math.abs(d)>50)lbShow(lbI+(d<0?1:-1),d<0?1:-1);lx=null});
 addEventListener("keydown",function(e){if($("lb").classList.contains("on")){if(e.key==="Escape")lbClose();if(e.key==="ArrowLeft")lbShow(lbI-1,-1);if(e.key==="ArrowRight")lbShow(lbI+1,1)}});
 }
+function rvw(t){return t.split(" ").map(function(w){return '<span class="sw">'+esc(w)+'</span>'}).join(" ")}
+function gph(g,hue){var s="";for(var i=0;i<(g.soon||0);i++)s+='<div class="gph" style="--h:'+hue+'"><span>✿</span><em>'+esc(tr("soon_shot"))+'</em></div>';return s}
+function heroesH(g,hue){return '<div class="heroes"><h2 class="rv">'+esc(tr("heroes"))+'</h2><div class="hgrid">'+g.heroes.map(function(h,i){var nm=h.name[L];
+ return '<article class="hc rv" style="--h:'+((hue+i*38)%360)+';transition-delay:'+i*90+'ms"><div class="hav">'+(h.img?'<img src="'+esc(h.img)+'" alt="'+esc(nm)+'">':'<canvas data-n="'+esc(h.name.ru)+'"></canvas>')+'</div><h3>'+esc(nm)+'</h3><p class="hr">'+esc(h.role[L])+'</p><p>'+esc(h.d[L])+'</p></article>'}).join("")+'</div></div>'}
 function renderGame(g,quiet){
- var imgs=slides(g).filter(function(x){return x.t==="i"}).map(function(x){return x.src}),n=imgs.length,
-  feats=(g.feat&&g.feat[L])||[],st=T[L].st[g.st]||g.st,link=g.url&&g.url!=="#",hue=hueOf(g.n),
+ var imgs=slides(g).filter(function(x){return x.t==="i"}).map(function(x){return x.src}),n=imgs.length,gimgs=g.shots||[],
+  feats=(g.feat&&g.feat[L])||[],st=T[L].st[g.st]||g.st,link=g.url&&g.url!=="#",hue=hueG(g),
   words=g.n.split(" "),longest=Math.max.apply(null,words.map(function(w){return w.length})),fs=Math.min(15,95/longest),hero=g.img||imgs[0];
  var art=g.artTitle&&hero,h='<div class="gh'+(art?' art':'')+'" style="--h:'+hue+';--c:'+(SC[g.st]||"#9d93b8")+'">'+(hero?(art?'<img class="gh-bg" src="'+esc(hero)+'" alt="">':'')+'<img class="gh-img'+(art?' fit':'')+'" src="'+esc(hero)+'" alt="'+esc(g.n)+'">':'<div class="gh-fall"></div>')
   +'<div class="gh-in"><a class="gback" href="index.html#games">← '+esc(tr("back"))+'</a>'
-  +'<div class="gpills"><span class="gpill"><i></i>'+esc(st)+'</span>'+(g.y?'<span class="gpill">'+g.y+'</span>':'')+''+g.tags.map(function(t){return '<span class="gpill">'+esc(t)+'</span>'}).join("")+'</div>'
+  +'<div class="gpills"><span class="gpill"><i></i>'+esc(st)+'</span>'+(g.y?'<span class="gpill">'+g.y+'</span>':'')+''+g.tags.map(function(t){return '<span class="gpill">'+esc(tagTxt(t))+'</span>'}).join("")+'</div>'
   +(g.artTitle?'<h1 class="sr">'+esc(g.n)+'</h1>':'<h1 style="--fs:'+fs+'vw" aria-label="'+esc(g.n)+'">'+words.map(function(w,i){return '<span class="w" style="--i:'+i+'"><i>'+esc(w)+'</i></span>'}).join("")+'</h1>')
   +'<div class="cta">'+(link?'<a class="btn p" href="'+esc(g.url)+'" target="_blank" rel="noopener">'+esc(tr("play"))+'</a>':'')+'<button class="btn" id="cp">'+esc(tr("copy"))+'</button></div></div><span class="gcue" aria-hidden="true"></span></div>'
-  +'<div class="story"><h2 class="rv">'+esc(tr("about"))+'</h2><p id="sp">'+g.l[L].split(" ").map(function(w){return '<span class="sw">'+esc(w)+'</span>'}).join(" ")+'</p></div>'
-  +feats.map(function(f,k){var i=f.indexOf(": "),t=i>0?f.slice(0,i):f,d=i>0?f.slice(i+2):"",im=n?imgs[n>1?(k+1)%n:0]:"";
+  +'<div class="story"><h2 class="rv">'+esc(tr("about"))+'</h2><p class="rvw">'+rvw(g.l[L])+'</p></div>'
+  +(g.tagline?'<div class="tagl rv"><p>'+esc(g.tagline[L])+'</p></div>':'')
+  +(g.heroes?heroesH(g,hue):'')
+  +(g.story2?'<div class="story s2"><p class="rvw">'+rvw(g.story2[L])+'</p></div>':'')
+  +feats.map(function(f,k){var i=f.indexOf(": "),t=i>0?f.slice(0,i):f,d=i>0?f.slice(i+2):"",im=n>1?imgs[(k+1)%n]:"";
    return '<div class="fp'+(k%2?' r':'')+'" style="--h:'+hue+'"><div class="fbg"'+(im?' data-px="0.12"><img src="'+esc(im)+'" alt="" loading="lazy">':'>')+'</div><div class="fc rv"><h3>'+esc(t)+'</h3>'+(d?'<p>'+esc(d)+'</p>':'')+'</div></div>'}).join("")
-  +(n>1?'<div class="gsec"><h2><span>'+esc(tr("shots"))+'</span><span class="gbs"><button class="gb" data-d="-1" aria-label="'+esc(tr("prev"))+'">‹</button><button class="gb" data-d="1" aria-label="'+esc(tr("next"))+'">›</button></span></h2><div class="gtrack">'+imgs.map(function(s,j){return '<button data-j="'+j+'" aria-label="'+esc(g.n)+'"><img src="'+esc(s)+'" alt="" loading="lazy"></button>'}).join("")+'</div></div>':'')
+  +((gimgs.length>1||g.soon)?'<div class="gsec"><h2><span>'+esc(tr("shots"))+'</span><span class="gbs"><button class="gb" data-d="-1" aria-label="'+esc(tr("prev"))+'">‹</button><button class="gb" data-d="1" aria-label="'+esc(tr("next"))+'">›</button></span></h2><div class="gtrack">'+gimgs.map(function(s,j){return '<button data-j="'+j+'" aria-label="'+esc(g.n)+'"><img src="'+esc(s)+'" alt="" loading="lazy"></button>'}).join("")+gph(g,hue)+'</div></div>':'')
   +(g.video?'<div class="gtr"><h2>'+esc(tr("trailer_h"))+'</h2><div class="vwrap" style="--h:'+hue+'"><button class="vp" data-id="'+esc(g.video)+'"><span>▶</span><em>'+esc(tr("trailer"))+'</em></button></div></div>':'')
   +'<div class="gend rv">'+(link?'<a class="btn p" href="'+esc(g.url)+'" target="_blank" rel="noopener">'+esc(tr("play"))+'</a>':'')+'<a class="btn" href="index.html#games">'+esc(tr("back"))+'</a></div>';
  var p=$("gp");p.classList.toggle("still",!!quiet);p.innerHTML=h;
  p.querySelectorAll(".rv").forEach(function(e){io.observe(e)});
- p.querySelectorAll(".gtrack button").forEach(function(b){b.onclick=function(){lbOpen(imgs,+b.dataset.j)}});
+ p.querySelectorAll(".hav canvas").forEach(function(c){sprite(c,c.dataset.n)});
+ p.querySelectorAll(".gtrack button").forEach(function(b){b.onclick=function(){lbOpen(gimgs,+b.dataset.j)}});
  p.querySelectorAll(".gb").forEach(function(b){b.onclick=function(){var t=p.querySelector(".gtrack");t.scrollBy({left:+b.dataset.d*t.clientWidth*.8,behavior:"smooth"})}});
  p.querySelectorAll(".vp").forEach(function(b){b.onclick=function(){var f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(b.dataset.id)+"?autoplay=1&rel=0";f.allow="autoplay; encrypted-media; picture-in-picture";f.allowFullscreen=true;f.title="Trailer";b.replaceWith(f)}});
  $("cp").onclick=function(){var b=this;try{navigator.clipboard.writeText(location.href).then(function(){b.textContent=tr("copied")})}catch(e){}};
@@ -144,7 +154,7 @@ function gpScroll(){gpRaf=0;if(!G)return;var vh=innerHeight,y=scrollY,e;
  e=document.querySelector("#gp .gh-img");if(e)e.style.translate="0 "+(Math.min(y,vh)*.3).toFixed(1)+"px";
  e=document.querySelector("#gp .gh-in");if(e){e.style.translate="0 "+(-Math.min(y,vh)*.12).toFixed(1)+"px";e.style.opacity=Math.max(0,1-y/(vh*.75)).toFixed(2)}
  document.querySelectorAll("#gp .fbg[data-px]").forEach(function(b){var r=b.parentNode.getBoundingClientRect();if(r.bottom<-100||r.top>vh+100)return;b.style.translate="0 "+((vh/2-(r.top+r.height/2))*parseFloat(b.dataset.px)).toFixed(1)+"px"});
- var sp=document.getElementById("sp");if(sp){var r=sp.getBoundingClientRect(),pr=Math.max(0,Math.min(1,(vh*.9-r.top)/r.height)),ws=sp.children,k=Math.ceil(pr*ws.length);for(var i=0;i<ws.length;i++)ws[i].classList.toggle("on",i<k)}}
+ document.querySelectorAll("#gp .rvw").forEach(function(sp){var r=sp.getBoundingClientRect(),pr=Math.max(0,Math.min(1,(vh*.9-r.top)/r.height)),ws=sp.children,k=Math.ceil(pr*ws.length);for(var i=0;i<ws.length;i++)ws[i].classList.toggle("on",i<k)})}
 addEventListener("scroll",function(){if(G&&!gpRaf)gpRaf=requestAnimationFrame(gpScroll)},{passive:true});
 addEventListener("resize",function(){if(G)gpScroll()});
 
