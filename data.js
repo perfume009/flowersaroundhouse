@@ -12,11 +12,17 @@
 //   feat   особенности, формат "Заголовок: пояснение" (каждая = отдельный экран)
 //   plain:true   убрать «хоррор-фильтр» с карточки
 //   artTitle:true   не писать название крупно, если оно уже есть на обложке
+//   hue    число 0-360: цвет страницы игры (если не указано, берётся из названия)
+//   tags   теги; для двух языков пиши так: {ru:"Экшен",en:"Action"}
+//   tagline  крупная фраза после описания;  story2  второй абзац истории
+//   heroes   герои: name, role, d (на двух языках) и по желанию img:"файл.jpg" с портретом
+//   soon   сколько «заглушек» под скриншоты показать в галерее. Когда сделаешь скрины,
+//          впиши их в shots:[...] и поставь soon:0
 //  Тексты d, l и feat пишутся на двух языках: {ru:..., en:...}
 //
 var GAMES=[
  {
-  n: "Escape From Churlu",
+  n: "Escape From Churlu 1.2 beta",
   id: "churlu",
   feat: {
    ru: [
@@ -62,43 +68,128 @@ var GAMES=[
   n: "Grand Theft Churlu Churl-city",
   id: "gtc",
   artTitle: true,
+  plain: true,
+  hue: 330,
+  img: "gtc.jpg",
+  shots: [],
+  soon: 4,
+  video: "",
+  d: {
+   ru: "Три героя. Один город. Ноль шансов на скучную жизнь.",
+   en: "Three heroes. One city. Zero chance of a boring life."
+  },
+  l: {
+   ru: "Добро пожаловать в Чурл-Сити — город контрастов, где элитные небоскрёбы Даунтауна соседствуют с хаосом трущоб Эльбана, а в порту под покровом ночи проворачивают свои тёмные делишки контрабандисты.",
+   en: "Welcome to Churl City, a city of contrasts where the elite skyscrapers of Downtown stand next to the chaos of the Elban slums, and smugglers run their dark business in the port under cover of night."
+  },
+  tagline: {
+   ru: "Три героя. Один город. Ноль шансов на скучную жизнь.",
+   en: "Three heroes. One city. Zero chance of a boring life."
+  },
+  heroes: [
+   {
+    name: {
+     ru: "Илья Чурлу",
+     en: "Ilya Churlu"
+    },
+    role: {
+     ru: "Уличный угонщик",
+     en: "Street car thief"
+    },
+    d: {
+     ru: "Из Эльбана. Знает каждый переулок родного района.",
+     en: "From Elban. Knows every alley of his home district."
+    }
+   },
+   {
+    name: {
+     ru: "Евгений Валянский",
+     en: "Evgeny Valyansky"
+    },
+    role: {
+     ru: "Бизнесмен с тёмным прошлым",
+     en: "Businessman with a dark past"
+    },
+    d: {
+     ru: "Решает вопросы через старые связи.",
+     en: "Solves problems through old connections."
+    }
+   },
+   {
+    name: {
+     ru: "Егор Богдан",
+     en: "Egor Bogdan"
+    },
+    role: {
+     ru: "Обычный челик",
+     en: "Just an ordinary guy"
+    },
+    d: {
+     ru: "Просто оказался не в том месте не в то время, но теперь вынужден выживать вместе со всеми.",
+     en: "He simply ended up in the wrong place at the wrong time, and now has to survive together with everyone else."
+    }
+   }
+  ],
+  story2: {
+   ru: "Их объединяет одна проблема: долг, из-за которого они влезли в крупную криминальную авантюру. Чтобы расплатиться и остаться в живых, им придётся объединиться. Угоняйте машины, взламывайте склады, уходите от погони и набивайте очки в безумных перестрелках.",
+   en: "They share one problem: a debt that dragged them into a major criminal gamble. To pay it off and stay alive, they will have to team up. Steal cars, break into warehouses, escape pursuits and rack up points in crazy shootouts."
+  },
+  tags: [
+   {
+    ru: "Экшен",
+    en: "Action"
+   },
+   {
+    ru: "Открытый мир",
+    en: "Open world"
+   },
+   {
+    ru: "Криминал",
+    en: "Crime"
+   }
+  ],
+  st: "в разработке",
+  y: 2026,
+  url: "#",
+  feat: {
+   ru: [
+    "Островной мегаполис: 3 уникальных района, аэропорт, порт и промышленные зоны.",
+    "Три героя — три стиля игры: Переключайтесь между персонажами в любой момент. У каждого своя специализация и уникальная спецспособность.",
+    "Аркадный экшен: Море оружия, гранаты и динамичные перестрелки."
+   ],
+   en: [
+    "Island metropolis: 3 unique districts, an airport, a port and industrial zones.",
+    "Three heroes, three play styles: Switch between characters at any moment. Each has their own specialty and a unique special ability.",
+    "Arcade action: A sea of weapons, grenades and dynamic shootouts."
+   ]
+  }
+ },
+ {
+  n: "Call of Churlu: Modern Elban",
+  id: "elban",
+  artTitle: true,
+  plain: true,
+  img: "elban.jpg",
+  shots: [
+   "elban.jpg"
+  ],
+  video: "",
+  d: {
+   ru: "Будет в разработке когда-нибудь...",
+   en: "Will be in development someday..."
+  },
+  l: {
+   ru: "Будет в разработке когда-нибудь...",
+   en: "Will be in development someday..."
+  },
+  tags: [],
+  st: "планируется",
+  y: "",
+  url: "#",
   feat: {
    ru: [],
    en: []
-  },
-  img: "gtc.jpg",
-  plain: true,
-  shots: [
-   "gtc.jpg"
-  ],
-  d: {
-   ru: "Новый проект в разработке.",
-   en: "A new project in development."
-  },
-  l: {
-   ru: "Подробности скоро.",
-   en: "More details soon."
-  },
-  tags: [],
-  st: "в разработке",
-  y: 2026,
-  url: "#"
- },
- {
-  n:"Call of Churlu: Modern Elban",
-  id:"elban",
-  artTitle:true,
-  plain:true,
-  img:"elban.jpg",
-  shots:["elban.jpg"],
-  video:"",
-  d:{ru:"Будет в разработке когда-нибудь...",en:"Will be in development someday..."},
-  l:{ru:"Будет в разработке когда-нибудь...",en:"Will be in development someday..."},
-  tags:[],
-  st:"планируется",
-  y:"",
-  url:"#",
-  feat:{ru:[],en:[]}
+  }
  }
 ];
 
