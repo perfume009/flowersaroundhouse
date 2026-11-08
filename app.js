@@ -133,8 +133,16 @@ function heroesH(g,hue){return '<div class="hh rv"><h2>'+esc(tr("heroes"))+'</h2
  return '<div class="fp hp'+(i%2?' r':'')+'" style="--h:'+((hue+i*38)%360)+'"><div class="fbg"'+(h.img?' data-px="0.12"><img src="'+esc(h.img)+'" alt="'+esc(nm)+'" style="object-position:'+esc(h.pos||"50% 50%")+'" loading="lazy">':'>')+'</div><div class="fc rv"><p class="hr">'+esc(h.role[L])+'</p><h3>'+esc(nm)+'</h3><p>'+esc(h.d[L])+'</p></div></div>'}).join("")}
 function renderGame(g,quiet){
  var imgs=slides(g).filter(function(x){return x.t==="i"}).map(function(x){return x.src}),n=imgs.length,gimgs=g.shots||[],
-  feats=(g.feat&&g.feat[L])||[],st=T[L].st[g.st]||g.st,link=g.url&&g.url!=="#",hue=hueG(g),
-  words=g.n.split(" "),longest=Math.max.apply(null,words.map(function(w){return w.length})),fs=Math.min(17,150/longest),hero=g.img||imgs[0];
+  feats=(g.feat&&g.feat[L])||[],st=T[L].st[g.st]||g.st,link=g.url&&g.url!=="#",hue=hueG(g);
+  var words=g.n.split(" "),longest=Math.max.apply(null,words.map(function(w){return w.length})),fs=Math.min(17,150/longest),hero=g.img||imgs[0];
+  var featBg=function(k){
+   if(g.featImgs)return g.featImgs[k]||"";
+   var pool=gimgs&&gimgs.length?gimgs:(n>1?imgs:[]);
+   if(pool.length>1&&pool[0]===hero)pool=pool.slice(1);
+   if(!pool.length)return "";
+   if(pool.length===1)return k===0?pool[0]:"";
+   return pool[k%pool.length]||"";
+  };
  var art=g.artTitle&&hero,h='<div class="gh'+(art?' art':'')+'" style="--h:'+hue+';--c:'+(SC[g.st]||"#7f8790")+'">'+(hero?(art?'<img class="gh-bg" src="'+esc(hero)+'" alt="">':'')+'<img class="gh-img'+(art?' fit':'')+'" src="'+esc(hero)+'" alt="'+esc(g.n)+'">':'<div class="gh-fall"></div>')
   +'<div class="gh-in"><a class="gback" href="index.html#games">← '+esc(tr("back"))+'</a>'
   +'<div class="gpills"><span class="gpill"><i></i>'+esc(st)+'</span>'+(g.y?'<span class="gpill">'+g.y+'</span>':'')+''+g.tags.map(function(t){return '<span class="gpill">'+esc(tagTxt(t))+'</span>'}).join("")+'</div>'
@@ -144,7 +152,7 @@ function renderGame(g,quiet){
   +(g.tagline?'<div class="tagl rv"><p>'+esc(g.tagline[L])+'</p></div>':'')
   +(g.heroes?heroesH(g,hue):'')
   +(g.story2?'<div class="story s2"><p class="rvw">'+rvw(g.story2[L])+'</p></div>':'')
-  +feats.map(function(f,k){var i=f.indexOf(": "),t=i>0?f.slice(0,i):f,d=i>0?f.slice(i+2):"",im=n>1?imgs[(k+1)%n]:"";
+  +feats.map(function(f,k){var i=f.indexOf(": "),t=i>0?f.slice(0,i):f,d=i>0?f.slice(i+2):"",im=featBg(k);
    return '<div class="fp'+(k%2?' r':'')+'" style="--h:'+hue+'"><div class="fbg"'+(im?' data-px="0.12"><img src="'+esc(im)+'" alt="" loading="lazy">':'>')+'</div><div class="fc rv"><h3>'+esc(t)+'</h3>'+(d?'<p>'+esc(d)+'</p>':'')+'</div></div>'}).join("")
   +((gimgs.length>1||g.soon)?'<div class="gsec"><h2><span>'+esc(tr("shots"))+'</span><span class="gbs"><button class="gb" data-d="-1" aria-label="'+esc(tr("prev"))+'">‹</button><button class="gb" data-d="1" aria-label="'+esc(tr("next"))+'">›</button></span></h2><div class="gtrack">'+gimgs.map(function(s,j){return '<button data-j="'+j+'" aria-label="'+esc(g.n)+'"><img src="'+esc(s)+'" alt="" loading="lazy"></button>'}).join("")+gph(g,hue)+'</div></div>':'')
   +(g.video?'<div class="gtr"><h2>'+esc(tr("trailer_h"))+'</h2><div class="vwrap" style="--h:'+hue+'"><button class="vp" data-id="'+esc(g.video)+'"><span>▶</span><em>'+esc(tr("trailer"))+'</em></button></div></div>':'')

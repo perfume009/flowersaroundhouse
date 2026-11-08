@@ -72,8 +72,10 @@ var GAMES=[
   plain: true,
   hue: 330,
   img: "gtc.jpg",
-  shots: [],
-  soon: 4,
+  shots: [
+   "gtc-1.jpg"
+  ],
+  soon: 3,
   video: "",
   d: {
    ru: "Три героя. Один город. Ноль шансов на скучную жизнь.",

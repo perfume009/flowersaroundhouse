@@ -62,11 +62,16 @@ section{max-width:var(--maxw);margin:0 auto;padding:16vh var(--pad) 0}
 h2{margin:0 0 6vh;font:500 clamp(34px,5vw,68px)/1.04 var(--display);letter-spacing:-.04em;color:#eaf3f9}
 .rv{opacity:0;translate:0 24px;transition:opacity 1.4s ease,translate 1.6s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;translate:none}
 
-/* --- Input --- */
-.tools{margin:-2vh 0 6vh}
+/* --- Input + Universe title --- */
+.tools{margin:-2vh 0 6vh;display:flex;align-items:center;position:relative}
 .tools input{width:min(100%,380px);height:44px;padding:0 18px;border:1px solid hsl(var(--input));border-radius:999px;background:hsl(var(--background)/.6);color:hsl(var(--foreground));font:400 15px var(--sans);outline:none;transition:border-color .2s,box-shadow .2s}
 .tools input::placeholder{color:hsl(var(--muted-foreground))}
 .tools input:focus{border-color:hsl(var(--ring));box-shadow:0 0 0 3px hsl(var(--ring)/.18)}
+.ccu-title{position:absolute;left:50%;transform:translateX(-50%);font:600 clamp(16px,1.9vw,24px)/1.2 var(--display);letter-spacing:-.02em;color:#eaf3f9;white-space:nowrap;pointer-events:none}
+@media (max-width:960px){
+ .tools{flex-direction:column;align-items:flex-start;gap:14px}
+ .ccu-title{position:static;transform:none}
+}
 
 /* --- Card + Badge: игры --- */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
