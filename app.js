@@ -9,12 +9,12 @@ function sprite(c,name){var r=rng(name),x=c.getContext("2d"),hue=Math.floor(r()*
  for(var y=0;y<10;y++)for(var i=0;i<5;i++)if(r()>.45){x.fillStyle="hsl("+(195+(hue+y*6)%40)+",30%,"+(46+r()*12)+"%)";x.fillRect(i,y,1,1);x.fillRect(9-i,y,1,1)}}
 
 // ----- тексты интерфейса (RU / EN) -----
-var T={ru:{n_games:"Игры",n_about:"Обо мне",n_contact:"Контакты",cta1:"Смотреть игры",cta2:"Связаться",bio:"Делаю игры сам: от идеи и геймплея до релиза.",foot:"Сделано с кофе",ph:"Поиск по названию",none:"Ничего не найдено. Попробуй другой запрос.",play:"Itch.io",close:"Закрыть",home:"В начало",stack:"Стек",det:"Подробности игры",dev_h:"Новости разработки",tg_btn:"Читать в Telegram",prev:"Назад",next:"Вперёд",trailer:"Смотреть трейлер",zoom:"Увеличить",back:"Все игры",about:"О игре",feat:"Особенности",shots:"Скриншоты",trailer_h:"Трейлер",d_status:"Статус",d_year:"Год",d_tags:"Теги",copy:"Скопировать ссылку",copied:"Ссылка скопирована",soon_shot:"Скриншот скоро",heroes:"Три героя",st:{"релиз":"релиз","jam":"jam","в разработке":"в разработке","планируется":"планируется"}},
- en:{n_games:"Games",n_about:"About",n_contact:"Contact",cta1:"View games",cta2:"Get in touch",bio:"I make games solo, from the first idea and gameplay to release.",foot:"Made with coffee",ph:"Search by title",none:"Nothing found. Try another search.",play:"Itch.io",close:"Close",home:"Back to top",stack:"Stack",det:"Game details",dev_h:"Dev news",tg_btn:"Follow on Telegram",prev:"Previous",next:"Next",trailer:"Watch trailer",zoom:"Enlarge",back:"All games",about:"About the game",feat:"Features",shots:"Screenshots",trailer_h:"Trailer",d_status:"Status",d_year:"Year",d_tags:"Tags",copy:"Copy link",copied:"Link copied",soon_shot:"Screenshot coming soon",heroes:"Three heroes",st:{"релиз":"released","jam":"jam","в разработке":"in development","планируется":"planned"}}};
+var T={ru:{n_games:"Игры",n_about:"Обо мне",n_contact:"Контакты",cta1:"Смотреть игры",cta2:"Связаться",bio:"Делаю игры сам: от идеи и геймплея до релиза.",foot:"",ph:"Поиск по названию",none:"Ничего не найдено. Попробуй другой запрос.",play:"Itch.io",close:"Закрыть",home:"В начало",stack:"Стек",det:"Подробности игры",dev_h:"Новости разработки",tg_btn:"Читать в Telegram",prev:"Назад",next:"Вперёд",trailer:"Смотреть трейлер",zoom:"Увеличить",back:"Все игры",about:"О игре",feat:"Особенности",shots:"Скриншоты",trailer_h:"Трейлер",d_status:"Статус",d_year:"Год",d_tags:"Теги",copy:"Скопировать ссылку",copied:"Ссылка скопирована",soon_shot:"Скриншот скоро",heroes:"Три героя",st:{"релиз":"релиз","jam":"jam","в разработке":"в разработке","1.2 beta":"1.2 beta","планируется":"планируется"}},
+ en:{n_games:"Games",n_about:"About",n_contact:"Contact",cta1:"View games",cta2:"Get in touch",bio:"I make games solo, from the first idea and gameplay to release.",foot:"",ph:"Search by title",none:"Nothing found. Try another search.",play:"Itch.io",close:"Close",home:"Back to top",stack:"Stack",det:"Game details",dev_h:"Dev news",tg_btn:"Follow on Telegram",prev:"Previous",next:"Next",trailer:"Watch trailer",zoom:"Enlarge",back:"All games",about:"About the game",feat:"Features",shots:"Screenshots",trailer_h:"Trailer",d_status:"Status",d_year:"Year",d_tags:"Tags",copy:"Copy link",copied:"Link copied",soon_shot:"Screenshot coming soon",heroes:"Three heroes",st:{"релиз":"released","jam":"jam","в разработке":"in development","1.2 beta":"1.2 beta","планируется":"planned"}}};
 var L="ru";try{L=localStorage.getItem("lang")}catch(e){}
 if(L!=="ru"&&L!=="en")L=((navigator.language||"").slice(0,2)==="ru")?"ru":"en";
 function tr(k){return T[L][k]}
-var SC={"релиз":"#a9cbdd","jam":"#7f93b3","в разработке":"#8fb8d4","планируется":"#5f7488"};
+var SC={"релиз":"#a9cbdd","jam":"#7f93b3","в разработке":"#8fb8d4","1.2 beta":"#8fb8d4","планируется":"#5f7488"};
 function tagTxt(t){return typeof t==="string"?t:t[L]}
 function hueG(g){return g.hue!=null?g.hue:hueOf(g.n)}
 function tagsH(g){return g.tags.map(function(t){return '<span>'+esc(tagTxt(t))+'</span>'}).join("")}
@@ -27,7 +27,7 @@ var HOME=document.body.dataset.page==="home",G=null;
 function layout(){
  var b=HOME?"":"index.html";
  $("nav").innerHTML='<a class="logo" href="'+b+'#top" data-ia="home" aria-label="В начало">flowersaroundhouse</a><a href="'+b+'#games" data-i="n_games">Игры</a><a href="'+b+'#about" data-i="n_about">Обо мне</a><a href="'+b+'#contact" data-i="n_contact">Контакты</a><div class="lg" role="group" aria-label="Language"><button data-l="ru">RU</button><button data-l="en">EN</button></div>';
- $("end").innerHTML='<div class="bg" aria-hidden="true"></div>\n<section id="contact"><h2 class="rv" data-i="n_contact">Контакты</h2><div class="links rv" id="links"></div></section>\n<footer><span>© <span id="y"></span> flowersaroundhouse</span><span data-i="foot">Сделано с кофе</span></footer>';
+ $("end").innerHTML='<div class="bg" aria-hidden="true"></div>\n<section id="contact"><h2 class="rv" data-i="n_contact">Контакты</h2><div class="links rv" id="links"></div></section>\n<footer><span>© <span id="y"></span> flowersaroundhouse</span></footer>';
  $("links").innerHTML=LINKS.map(function(l){return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener"><span>'+esc(l[0])+'</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>'}).join("");
  $("y").textContent=new Date().getFullYear();
  addEventListener("scroll",function(){$("nav").classList.toggle("s",scrollY>40)},{passive:true});
@@ -44,9 +44,9 @@ function draw(){var q=$("q").value.toLowerCase();
  $("grid").innerHTML=list.length?list.map(function(g,k){return '<a class="card'+(g.plain?' plain':'')+'" href="'+esc(pageOf(g))+'" data-i="'+GAMES.indexOf(g)+'" style="--h:'+hueG(g)+';--c:'+(SC[g.st]||"#7f8790")+';--dl:'+k*90+'ms"><div class="cover">'+(g.img?'<img src="'+esc(g.img)+'" alt="'+esc(g.n)+'" loading="lazy">':'<canvas data-n="'+esc(g.n)+'"></canvas>')+'</div><div class="bd"><h3>'+esc(g.n)+'</h3><div class="meta"><i class="dot"></i><span>'+esc(T[L].st[g.st]||g.st)+'</span>'+(g.y?'<span>'+g.y+'</span>':'')+'</div><p>'+esc(g.d[L])+'</p><div class="tags">'+tagsH(g)+'</div></div></a>'}).join(""):'<p class="empty">'+tr("none")+'</p>';
  document.querySelectorAll("canvas[data-n]").forEach(function(c){sprite(c,c.dataset.n)});
  document.querySelectorAll(".card").forEach(function(c){io.observe(c);
-  c.onpointermove=function(e){if(e.pointerType!=="mouse")return;var b=c.getBoundingClientRect(),px=(e.clientX-b.left)/b.width,py=(e.clientY-b.top)/b.height;
-   c.style.setProperty("--ry",(px-.5)*8+"deg");c.style.setProperty("--rx",-(py-.5)*8+"deg");c.style.setProperty("--mx",px*b.width+"px");c.style.setProperty("--my",py*b.height+"px")};
-  c.onpointerleave=function(){c.style.setProperty("--rx","0deg");c.style.setProperty("--ry","0deg")}})}
+  c.onpointermove=function(e){if(e.pointerType!=="mouse")return;var b=c.getBoundingClientRect();
+   c.style.setProperty("--mx",(e.clientX-b.left)+"px");c.style.setProperty("--my",(e.clientY-b.top)+"px")};
+  c.onpointerleave=function(){c.style.setProperty("--mx","-500px");c.style.setProperty("--my","-500px")}})}
 
 function renderLog(){$("log").innerHTML=LOG.map(function(l){return '<div class="row"><b>'+esc(l[0])+'</b><p>'+esc(l[L==="en"?2:1])+'</p></div>'}).join("")}
 function renderDev(){$("dlog").innerHTML=DEVLOG.map(function(d){return '<div class="row"><b>'+esc(d.d)+'</b><p>'+esc(d[L])+'</p></div>'}).join("")}
@@ -60,6 +60,10 @@ function homeInit(){
  sceneInit();
 }
 
+
+var M={x:typeof innerWidth!=="undefined"?innerWidth/2:500,y:typeof innerHeight!=="undefined"?innerHeight/2:400,tx:typeof innerWidth!=="undefined"?innerWidth/2:500,ty:typeof innerHeight!=="undefined"?innerHeight/2:400,vx:0,vy:0,on:false};
+addEventListener("pointermove",function(e){M.tx=e.clientX;M.ty=e.clientY;M.on=true});
+document.addEventListener("mouseleave",function(){M.on=false});
 
 // ----- главная сцена: одинокая фигура на снежной равнине (пиксельная, как «пережатое» фото) -----
 function sceneInit(){
@@ -92,14 +96,37 @@ function snowInit(){
  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
  var hero=document.querySelector(".hero"),layers=[],S=3;
  function mk(parent,id,cls,n){var c=document.createElement("canvas");if(id)c.id=id;if(cls)c.className=cls;c.setAttribute("aria-hidden","true");parent.appendChild(c);
-  var L={c:c,x:c.getContext("2d"),F:[]};for(var i=0;i<n;i++)L.F.push({x:Math.random(),y:Math.random(),v:.15+Math.random()*.35,d:Math.random()*6,a:.25+Math.random()*.5});layers.push(L)}
+  var L={c:c,x:c.getContext("2d"),F:[]};for(var i=0;i<n;i++)L.F.push({x:Math.random(),y:Math.random(),v:.15+Math.random()*.35,d:Math.random()*6,a:.25+Math.random()*.5,vx:0,vy:0});layers.push(L)}
  mk(document.body,"snow","",110);if(hero)mk(hero,"","hsnow",90);
  function rs(){layers.forEach(function(L){L.W=L.c.width=Math.ceil((L.c.clientWidth||innerWidth)/S);L.H=L.c.height=Math.ceil((L.c.clientHeight||innerHeight)/S)})}
  rs();addEventListener("resize",rs);
  var last=performance.now();
  (function f(now){requestAnimationFrame(f);if(document.hidden)return;var dt=Math.min(.05,(now-last)/1000);last=now;
-  layers.forEach(function(L){L.x.clearRect(0,0,L.W,L.H);for(var i=0;i<L.F.length;i++){var p=L.F[i];p.y+=p.v*dt*.5;if(p.y>1.02){p.y=-.02;p.x=Math.random()}
-   L.x.fillStyle="rgba(215,232,244,"+p.a+")";L.x.fillRect(Math.round((p.x+Math.sin(now/2300+p.d)*.012)*L.W),Math.round(p.y*L.H),1,1)}})})(last);
+  if(M.on){var px=M.x,py=M.y;M.x+=(M.tx-M.x)*.18;M.y+=(M.ty-M.y)*.18;M.vx=M.x-px;M.vy=M.y-py}
+  layers.forEach(function(L){L.x.clearRect(0,0,L.W,L.H);
+   var r=L.c.getBoundingClientRect(),lmx=(M.x-r.left)/S,lmy=(M.y-r.top)/S;
+   var hasM=M.on&&lmx>=-40&&lmx<=L.W+40&&lmy>=-40&&lmy<=L.H+40;
+   for(var i=0;i<L.F.length;i++){
+    var p=L.F[i];
+    p.vx=(p.vx||0)*.92;p.vy=(p.vy||0)*.92;
+    var sx=(p.x+Math.sin(now/2300+p.d)*.012)*L.W,sy=p.y*L.H;
+    if(hasM){
+     var dx=sx-lmx,dy=sy-lmy,d2=dx*dx+dy*dy;
+     if(d2<3600&&d2>1){
+      var d=Math.sqrt(d2),force=(1-d/60)*.05;
+      p.vx+=(dx/d)*force+(M.vx/S)*force*.35;
+      p.vy+=(dy/d)*force+(M.vy/S)*force*.35;
+     }
+    }
+    p.x+=p.vx;p.y+=p.vy+p.v*dt*.5;
+    if(p.x<0)p.x+=1;else if(p.x>1)p.x-=1;
+    if(p.y>1.02){p.y=-.02;p.x=Math.random();p.vx=p.vy=0}
+    var sz=p.v>.42?2:1;
+    L.x.fillStyle="rgba(215,232,244,"+p.a+")";
+    L.x.fillRect(Math.round((p.x+Math.sin(now/2300+p.d)*.012)*L.W),Math.round(p.y*L.H),sz,sz);
+   }
+  });
+ })(last);
 }
 
 // ----- страница игры -----
@@ -140,8 +167,8 @@ function renderGame(g,quiet){
    var pool=gimgs&&gimgs.length?gimgs:(n>1?imgs:[]);
    if(pool.length>1&&pool[0]===hero)pool=pool.slice(1);
    if(!pool.length)return "";
-   if(pool.length===1)return k===0?pool[0]:"";
-   return pool[k%pool.length]||"";
+   if(g.repeatFeat||g.id==="churlu")return pool[k%pool.length]||"";
+   return pool[k]||"";
   };
  var art=g.artTitle&&hero,h='<div class="gh'+(art?' art':'')+'" style="--h:'+hue+';--c:'+(SC[g.st]||"#7f8790")+'">'+(hero?(art?'<img class="gh-bg" src="'+esc(hero)+'" alt="">':'')+'<img class="gh-img'+(art?' fit':'')+'" src="'+esc(hero)+'" alt="'+esc(g.n)+'">':'<div class="gh-fall"></div>')
   +'<div class="gh-in"><a class="gback" href="index.html#games">← '+esc(tr("back"))+'</a>'
@@ -154,7 +181,7 @@ function renderGame(g,quiet){
   +(g.story2?'<div class="story s2"><p class="rvw">'+rvw(g.story2[L])+'</p></div>':'')
   +feats.map(function(f,k){var i=f.indexOf(": "),t=i>0?f.slice(0,i):f,d=i>0?f.slice(i+2):"",im=featBg(k);
    return '<div class="fp'+(k%2?' r':'')+'" style="--h:'+hue+'"><div class="fbg"'+(im?' data-px="0.12"><img src="'+esc(im)+'" alt="" loading="lazy">':'>')+'</div><div class="fc rv"><h3>'+esc(t)+'</h3>'+(d?'<p>'+esc(d)+'</p>':'')+'</div></div>'}).join("")
-  +((gimgs.length>1||g.soon)?'<div class="gsec"><h2><span>'+esc(tr("shots"))+'</span><span class="gbs"><button class="gb" data-d="-1" aria-label="'+esc(tr("prev"))+'">‹</button><button class="gb" data-d="1" aria-label="'+esc(tr("next"))+'">›</button></span></h2><div class="gtrack">'+gimgs.map(function(s,j){return '<button data-j="'+j+'" aria-label="'+esc(g.n)+'"><img src="'+esc(s)+'" alt="" loading="lazy"></button>'}).join("")+gph(g,hue)+'</div></div>':'')
+  +((gimgs.length>1||g.soon)?'<div class="gsec"><h2><span>'+esc(tr("shots"))+'</span></h2><div class="gtrack-wrap"><button class="gb pv" data-d="-1" aria-label="'+esc(tr("prev"))+'">‹</button><div class="gtrack">'+gimgs.map(function(s,j){return '<button data-j="'+j+'" aria-label="'+esc(g.n)+'"><img src="'+esc(s)+'" alt="" loading="lazy"></button>'}).join("")+gph(g,hue)+'</div><button class="gb nx" data-d="1" aria-label="'+esc(tr("next"))+'">›</button></div></div>':'')
   +(g.video?'<div class="gtr"><h2>'+esc(tr("trailer_h"))+'</h2><div class="vwrap" style="--h:'+hue+'"><button class="vp" data-id="'+esc(g.video)+'"><span>▶</span><em>'+esc(tr("trailer"))+'</em></button></div></div>':'')
   +'<div class="gend rv">'+(link?'<a class="btn p" href="'+esc(g.url)+'" target="_blank" rel="noopener">'+esc(tr("play"))+'</a>':'')+'<a class="btn" href="index.html#games">'+esc(tr("back"))+'</a></div>';
  var p=$("gp");p.classList.toggle("still",!!quiet);p.innerHTML=h;
