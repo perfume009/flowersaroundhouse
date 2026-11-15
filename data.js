@@ -77,7 +77,9 @@ var GAMES=[
    "all-heroes.png",
    "guns-in-city.png",
    "heroes-with-car.png",
-   "churl-finance.png"
+   "churl-finance.png",
+   "valyanski-in-home.png",
+   "churlu-car-stealer.png"
   ],
   soon: 0,
   video: "",
